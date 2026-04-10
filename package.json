@@ -9,6 +9,11 @@
   "scripts": {
     "build": "npm run build --workspaces",
     "test": "npm run test --workspaces",
-    "typecheck": "npm run typecheck --workspaces"
+    "typecheck": "npm run typecheck --workspaces",
+    "dist:mcp": "./scripts/dist-mcp.sh",
+    "dist:claw": "./scripts/dist-claw.sh"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0"
   }
 }

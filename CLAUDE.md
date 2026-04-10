@@ -26,6 +26,11 @@ npm run typecheck             # type-check all packages
 cd packages/agent-bus && npx vitest run     # run shared lib tests
 cd packages/mcp-server && npx tsc --noEmit  # type-check MCP server
 cd packages/openclaw-plugin && npx tsc --noEmit  # type-check plugin
+
+# Distribution:
+./scripts/dist-mcp.sh                    # bundle MCP server → dist/agent-bridge-mcp
+./scripts/dist-mcp.sh /usr/local/bin/agent-bridge-mcp  # install directly
+./scripts/dist-claw.sh /path/to/dest     # stage OpenClaw plugin at dest folder
 ```
 
 ## Package Dependencies

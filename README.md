@@ -84,15 +84,20 @@ Agents that cannot subscribe to MQTT push (e.g., those behind MCP without channe
 
 ### Claude Code (MCP Server)
 
+Build and install the self-contained MCP binary:
+
+```bash
+./scripts/dist-mcp.sh ~/.local/bin/agent-bridge-mcp
+```
+
 Add to your `.mcp.json`:
 
 ```json
 {
   "mcpServers": {
     "agent-bridge": {
-      "type": "stdio",
-      "command": "node",
-      "args": ["packages/mcp-server/dist/index.js"],
+      "command": "agent-bridge-mcp",
+      "args": [],
       "env": {
         "MQTT_URL": "mqtt://your-broker:1883",
         "MQTT_USER": "...",
@@ -106,14 +111,16 @@ Add to your `.mcp.json`:
 
 ### OpenClaw Plugin
 
-Add to your OpenClaw configuration:
+Build a self-contained extension folder:
+
+```bash
+./scripts/dist-claw.sh /path/to/openclaw/extensions/openclaw-mqtt-plugin
+```
+
+Then add to your OpenClaw `plugins.load.paths`:
 
 ```json
-{
-  "openclaw": {
-    "extensions": ["@kryptt/openclaw-plugin/src/index.ts"]
-  }
-}
+["/path/to/openclaw/extensions/openclaw-mqtt-plugin"]
 ```
 
 ## Environment Variables
@@ -138,6 +145,17 @@ npm run build                # build all packages
 npm test                     # test all packages
 npm run typecheck             # type-check all packages
 ```
+
+### Distribution
+
+```bash
+./scripts/dist-mcp.sh                     # bundle MCP → dist/agent-bridge-mcp
+./scripts/dist-mcp.sh /usr/local/bin/...  # bundle + install
+./scripts/dist-claw.sh /path/to/dest      # stage OpenClaw plugin folder
+```
+
+`dist-mcp.sh` uses esbuild to produce a single self-contained Node.js executable (shebang included).
+`dist-claw.sh` copies plugin source, installs production deps, and stages `@kryptt/agent-bus` locally — no npm publish required.
 
 ## License
 
