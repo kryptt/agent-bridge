@@ -18,11 +18,14 @@ npx esbuild packages/mcp-server/dist/index.js \
   --bundle \
   --platform=node \
   --target=node20 \
-  --format=esm \
-  --banner:js='#!/usr/bin/env node' \
+  --format=cjs \
   --outfile="$DEST" \
-  --sourcemap=linked \
   --minify-syntax
+
+# Ensure shebang is present (esbuild may strip it from the entry point)
+if ! head -1 "$DEST" | grep -q '^#!/'; then
+  sed -i '1i#!/usr/bin/env node' "$DEST"
+fi
 
 chmod +x "$DEST"
 echo "MCP binary ready: $DEST"
