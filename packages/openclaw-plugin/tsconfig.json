@@ -1,0 +1,14 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": "src",
+    "composite": true,
+    "noEmit": true,
+    "downlevelIteration": true
+  },
+  "references": [
+    { "path": "../agent-bus" }
+  ],
+  "include": ["src"]
+}

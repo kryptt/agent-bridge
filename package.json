@@ -1,0 +1,14 @@
+{
+  "name": "agent-bridge",
+  "private": true,
+  "workspaces": [
+    "packages/agent-bus",
+    "packages/mcp-server",
+    "packages/openclaw-plugin"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces",
+    "test": "npm run test --workspaces",
+    "typecheck": "npm run typecheck --workspaces"
+  }
+}

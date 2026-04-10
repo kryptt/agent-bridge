@@ -1,0 +1,26 @@
+{
+  "name": "@kryptt/openclaw-plugin",
+  "version": "0.3.0",
+  "type": "module",
+  "scripts": {
+    "build": "tsc -b",
+    "typecheck": "tsc --noEmit",
+    "test": "echo 'no standalone tests — tested via @kryptt/agent-bus'"
+  },
+  "dependencies": {
+    "@kryptt/agent-bus": "*",
+    "effect": "^3.14.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.7.0"
+  },
+  "openclaw": {
+    "extensions": [
+      "./src/index.ts"
+    ],
+    "compat": {
+      "pluginApi": ">=2026.4.5"
+    }
+  }
+}
