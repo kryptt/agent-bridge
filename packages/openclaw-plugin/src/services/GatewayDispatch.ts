@@ -132,7 +132,7 @@ export const GatewayDispatchLive = Layer.succeed(GatewayDispatch, {
         await ensureConnected()
         const chatId = uuid()
         const chatResult = new Promise<string>((resolve, reject) => {
-          const timeout = setTimeout(() => { chatPromises.delete(chatId); reject(new Error('Chat response timeout (300s)')) }, 300_000)
+          const timeout = setTimeout(() => { chatPromises.delete(chatId); reject(new Error('Chat response timeout (600s)')) }, 600_000)
           chatPromises.set(chatId, { resolve, reject, timeout, text: '' })
         })
         await sendRequest('chat.send', { sessionKey: 'main', message: prompt, deliver: true, idempotencyKey: uuid() })
